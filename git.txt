@@ -1,5 +1,20 @@
-removing git
-> rm -rf .git
+Commands Learned
+
+
+->git init                      //initialize git repo
+
+
+->rm -rf .git                           //removing git
+
+->git add .                             // staged and add all and ready to commit
+
+->git commit -m "commit statement"      // save
+
+
+
+
+
+
 
 
 
