@@ -64,7 +64,7 @@ let checkCurriculum = (tableName) => {
                 let checkTable;
 
                 if (err) {
-                    console.log(err);
+
                     checkTable = false;
 
                 }
