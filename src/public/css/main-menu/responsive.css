@@ -1,0 +1,36 @@
+@media screen and (min-width: 992px) {
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  nav ul li {
+    flex: 2 0 auto;
+  }
+  .options {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+  }
+  .student-list {
+    background: linear-gradient(rgba(60, 56, 56, 0.6), rgba(58, 54, 54, 0.6));
+  }
+  .subjects {
+    /* order: 3; */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  }
+  /* order: 1; */
+  .sidebar {
+    height: 100%;
+    border-right: 1px solid #e7e9eb;
+  }
+}
+
+/* 
+.accountabilities {
+  order: 2;
+}
+.grades {
+  order: 4;
+} */

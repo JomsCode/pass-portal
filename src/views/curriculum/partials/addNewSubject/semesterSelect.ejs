@@ -1,0 +1,10 @@
+<% const semesters = [ "1st", "2nd", "Summer Class" ] %>
+<!-- -------------- -->
+<%semesters.forEach(item => { if(semester==item){ %>
+<option selected><%- item%></option>
+
+<%}else%>
+
+<option><%- item%></option>
+
+<%});%>

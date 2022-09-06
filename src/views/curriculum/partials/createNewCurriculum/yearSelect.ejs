@@ -1,0 +1,15 @@
+<% let date=new Date(); const year=date.getFullYear(); %>
+<!--  -->
+<% for (let i=0 ;i<10;i++) { %>
+<!--  -->
+<% let currentYear = (year-i) +"-"+ (year-i+1); %>
+<!--  -->
+<% if(acad_year== currentYear) {%>
+
+<option selected><%- currentYear %></option>
+
+<%}else{%>
+
+<option><%- currentYear %></option>
+
+<% }} %>

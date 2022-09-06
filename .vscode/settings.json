@@ -1,0 +1,26 @@
+{
+  "todo-tree.tree.showBadges": true,
+  "todo-tree.highlights.customHighlight": {
+    "BUG": {
+      "icon": "bug"
+    },
+    "HACK": {
+      "icon": "tools"
+    },
+    "FIXME": {
+      "icon": "flame"
+    },
+    "XXX": {
+      "icon": "$(close)"
+    }
+  },
+  "todo-tree.highlights.defaultHighlight": {
+    "FIXME": {
+      "foreground": "black",
+      "iconColour": "yellow",
+      "gutterIcon": true
+    }
+  },
+  "todo-tree.tree.disableCompactFolders": false,
+  "todo-tree.tree.showCountsInTree": true
+}

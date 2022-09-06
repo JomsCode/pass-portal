@@ -1,0 +1,75 @@
+<title>PASS College | Portal Login</title>
+
+<div
+  class="d-flex"
+  style="
+    height: 100vh;
+    justify-content: center;
+    background-color: rgb(23, 18, 17);
+    align-items: center;
+  "
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-5">
+        <img src="img/SchoolLogo.png" alt="SchoolLogo" />
+      </div>
+
+      <div class="col-lg-4">
+        <% msg.forEach(item=> {%>
+
+        <div class="alert alert-dismissible alert-danger">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+          ></button>
+          <strong> <%- item %> </strong>
+
+          <!-- <a href="#" class="alert-link">Change a few things up</a> and try submitting
+                  again. -->
+        </div>
+
+        <%}); %>
+
+        <form method="POST" action="<%= rolepath %>">
+          <div class="role">
+            <h1 id="role" style="color: #f7cc32"><%= role %> Login</h1>
+          </div>
+
+          <div class="form-group">
+            <label
+              for="studentID"
+              class="form-label mt-4"
+              style="color: #f7cc32"
+              >ID</label
+            >
+            <input
+              class="form-control"
+              name="studentID"
+              id="studentID"
+              aria-describedby="emailHelp"
+              placeholder="Enter School ID"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label mt-4" style="color: #f7cc32"
+              >Password</label
+            >
+            <input
+              name="password"
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+            />
+          </div>
+
+          <br />
+          <button type="submit" class="btn btn-custom">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

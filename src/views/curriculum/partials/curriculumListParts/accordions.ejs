@@ -1,0 +1,45 @@
+<% let courseAcronymList =
+["BSA","BSBA","BSCS","BSCRIM","BEED","BSHM","BSTM"];%> 
+
+<% let courseNameList=[   "Bachelor of Science in Accountancy",
+                          "Bachelor of Science in Business Administration",
+                          "Bachelor of Science in Computer Science",
+                          "Bachelor of Science in Criminilogy",
+                          "Bachelor of Elementary Education",
+                          "Bachelor of Science in Hospitality Management",
+                          "Bachelor of Science in Tourism Management"
+                          
+                      ];
+let yearLevel = ["1st year","2nd year", "3rd year","4th year"];
+
+%>
+<%courseNameList.forEach((item,index) => { %>
+
+<div class="accordion-item">
+  <h2 class="accordion-header" id="heading<%- courseAcronymList[index]%> ">
+    <button
+      class="accordion-button collapsed"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#<%- courseAcronymList[index]%>"
+      aria-controls="<%- courseAcronymList[index]%>"
+      aria-expanded="false"
+      onclick="">
+      <%- item %> 
+  </h2>
+  <div
+    id="<%- courseAcronymList[index]%>"
+    class="accordion-collapse collapse"
+    aria-labelledby="heading<%-courseAcronymList[index]%>"
+    data-bs-parent="#listCon"
+  >
+    <div class="list-group">
+      <% yearLevel.forEach((item)=>{%>
+        <button type="submit" class="list-group-item list-group-item-action"> <%- item %> </button>
+    <%  }) %> 
+    
+    </div>
+  </div>
+</div>
+
+<%});%>

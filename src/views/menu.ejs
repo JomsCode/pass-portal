@@ -1,0 +1,54 @@
+<title>Menu</title>
+<div class="navigationBar">
+  <nav>
+    <form method="POST" action="/logout">
+      <ul>
+        <li>
+          <!-- <a href="/"class="homepage"> -->
+          <h1>PASS PORTAL</h1>
+          <h4>Registrar</h4>
+          <!-- </a> -->
+        </li>
+
+        <!-- <li><a href="/dashboard" class="tabs">Dashboard</a></li> -->
+        <li><a class="tabs"> <%=// user.username %> </a></li>
+        <li><a href="/account" class="tabs">Account</a></li>
+        <li><a href="/logout" class="tabs">Logout </a></li>
+      </ul>
+    </form>
+  </nav>
+</div>
+<div class="menu-container">
+  <div
+    class="optionsContainer"
+    style="
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('img/logoWithLaurel.png');
+    "
+  >
+    <div class="options">
+      <a class="option dark student-list" href="/student-list">Student List</a>
+      <a class="option dark" href="/staff">Staff List</a>
+
+      <a class="option light curriculum" href="/curriculum">Curriculum</a>
+      <a class="option dark grades" href="/grades">Grades</a>
+
+      <a class="option light accountabilities" href="/accountabilities"
+        >Accountabilities</a
+      >
+    </div>
+  </div>
+
+  <div class="footer">
+    <nav>
+      <ul>
+        <li>
+          <a href="https://www.facebook.com/passcollege/" class="tabs"
+            >PASS College Main Page
+          </a>
+        </li>
+      </ul>
+      <div>All rights Reserved 2022</div>
+    </nav>
+  </div>
+</div>

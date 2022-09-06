@@ -1,0 +1,22 @@
+<div class="container">
+  <div>
+    <p style="color: red"><%= error %></p>
+  </div>
+  <select
+    value="<%= //course_assigned %>"
+    class="form-select my-2"
+    id="course"
+    name="course"
+  >
+    <%- include("./partials/createNewCurriculum/courseSelect") %>
+  </select>
+
+  <select
+    value="<%= //year %>"
+    class="form-select my-2"
+    id="acadYear"
+    name="acadYear"
+  >
+    <%- include("./partials/createNewCurriculum/yearSelect")%>
+  </select>
+</div>

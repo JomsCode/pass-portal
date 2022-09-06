@@ -1,0 +1,16 @@
+<% const options=[ "1st year" ,"2nd year","3rd year","4th year" ];%>
+    <%options.forEach(item=>{ %>
+        <% if(year==item){ %>
+
+            <option selected>
+                <%= item %>
+            </option>
+
+            <%}else{%>
+
+                <option>
+                    <%= item %>
+                </option>
+
+                <%}%>
+                    <%}); %>

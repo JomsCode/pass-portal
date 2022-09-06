@@ -1,0 +1,1 @@
+CREATE TABLE `pass-portal_db`.`admin_user` (`id` VARCHAR(16) NOT NULL , `username` VARCHAR(45) NOT NULL , `firstname` VARCHAR(45) NOT NULL , `lastname` VARCHAR(45) NOT NULL , `email` VARCHAR(45) NOT NULL , `password` VARCHAR(45) NOT NULL , `position` VARCHAR(45) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

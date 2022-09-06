@@ -1,0 +1,19 @@
+<% const options=[ 'All','BSA' , "BSBA" , "BSCRIM" , "BSCS" , "BEED" , "BSTM" , "BSHM"
+];%>
+
+
+<%options.forEach(item=>{ %>
+<% if(course_assigned==item){ %>
+
+<option selected>
+  <%= item %>
+</option>
+
+<%}else{%>
+
+<option>
+  <%= item %>
+</option>
+
+<%}%>
+                <%}); %>

@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* PASS College Logo */
+/* Red: #DE3530 */
+/* Yellow: #f7cc32; */
+/* Black: #3B3D30 */
+.sidebar {
+  height: auto;
+
+  margin-bottom: 50px;
+}
+nav ul {
+  list-style-type: none;
+  border-bottom: 3px solid #f7cc32;
+  background-color: rgb(23, 18, 17);
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.footer nav ul {
+  border: none;
+}
+.footer nav {
+  border-bottom: 3px solid #f7cc32;
+  background-color: rgb(23, 18, 17);
+}
+nav ul li a,
+nav ul li h1 {
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  font-size: 20pt;
+  padding: 15px 25px;
+  margin: 0 !important;
+  color: #f7cc32;
+}
+nav ul li h1 {
+  font-size: 30pt;
+}
+.footer nav div {
+  font-size: 10pt;
+  padding: 0px;
+  color: #f7cc32;
+  text-align: center;
+}
+.footer nav ul li a {
+  padding: 0;
+}
+.tabs:hover {
+  color: #f3f1eb;
+}
+
+/* background-color: rgb(23, 18, 17); */
+.homepage {
+  display: flex;
+  background-color: #f7cc32;
+  color: rgb(23, 18, 17);
+  justify-content: center;
+}
+.homepage:hover {
+  background-color: #dbcd9d;
+  color: white;
+}
+
+.bacgroundPhoto {
+  height: 100%;
+  background-image: url("../../img/logoWithLaurel.png");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px 0 80px 0;
+}
+
+.menu-container .optionsContainer,
+.menu-container .optionsContainer .options {
+  min-height: 90vh;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.menu-container .options {
+  padding: 20px 0 80px 0;
+  /* backdrop-filter: blur(5px); */
+}
+.menu-container .optionsContainer .options {
+  margin: 0;
+}
+.menu-container .optionsContainer .options .option {
+  margin: 25px;
+  overflow: hidden;
+  position: relative;
+  padding: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* }
+
+.option a { */
+  font-size: 20pt;
+  text-decoration: none;
+  color: #f3f1eb;
+}
+.dark {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+.dark:hover {
+  background: linear-gradient(rgba(152, 94, 94, 0.6), rgba(167, 106, 106, 0.6));
+}
+
+.light {
+  background: linear-gradient(rgba(60, 56, 56, 0.6), rgba(58, 54, 54, 0.6));
+}
+.light:hover {
+  background: linear-gradient(rgba(152, 94, 94, 0.6), rgba(167, 106, 106, 0.6));
+}
+.option:hover {
+  color: #f7cc32;
+}

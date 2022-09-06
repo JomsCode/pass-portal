@@ -1,0 +1,120 @@
+<title>Student List | Add New Student</title>
+
+<div class="navigationBar">
+  <nav>
+    <ul>
+      <li>
+        <h1>PASS COLLEGE PORTAL</h1>
+      </li>
+
+      <li><a href="/dashboard" class="tabs">Dashboard</a></li>
+      <li><a href="/account" class="tabs">Account</a></li>
+      <li><a href="/log-in" class="tabs">Logout </a></li>
+    </ul>
+  </nav>
+</div>
+<a class="" href="/menu" style="text-decoration: none">
+  <button type="button" class="btn btn-outline-secondary m-3">
+    Go back to Menu
+  </button>
+</a>
+<ol class="breadcrumb px-3">
+  <li class="breadcrumb-item"><a href="/menu">Menu</a></li>
+  <li class="breadcrumb-item"><a href="/student-list">Student List</a></li>
+  <li class="breadcrumb-item active">Add New Student</li>
+</ol>
+
+<hr />
+
+<div class="container mt-5">
+  <%-// include("./partials/errors") %>
+
+  <form method="POST" action="/student-list/addNewStudent">
+    <div class="d-flex justify-content-end flex-wrap">
+      <button class="btn btn-custom col-lg-2 mx-3" type="submit">Add</button>
+
+      <a class="btn btn-secondary col-lg-2" href="/student-list" style="color: #000">Cancel</a>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-lg-6">
+        <label for="year" class="form-label mt-4">Year</label>
+        <select value="<%= year %>" class="form-select" id="year" name="year">
+          <%- include ("./partials/addNewStudent/yearSelect") %>
+        </select>
+      </div>
+
+      <div class="form-group col-lg-6">
+        <label for="course" class="form-label mt-4">Course</label>
+        <select value="<%= course %>" class="form-select" id="course" name="course">
+          <%- include("./partials/addNewStudent/courseSelect") %>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-3">
+        <label for="schoolID" class="form-label mt-4">ID</label>
+        <input class="form-control" value="<%= id %>" name="studentID" id="studentID" placeholder="Student ID" oninput='this.classList.remove("is-invalid") ' required />
+      </div>
+
+      <div class="form-group col-lg-3">
+        <label for="firstName" class="form-label mt-4">First Name</label>
+        <input value="<%= firstName %>" type="text" class="form-control" name="firstName" id="firstName" placeholder="e.g. Victor" required />
+      </div>
+
+      <div class="form-group col-lg-3">
+        <label for="middleInitial" class="form-label mt-4">Middle Initials</label>
+        <input value="<%= middleInitial %>" type="text" class="form-control" name="middleInitial" id="middleInitial" placeholder="e.g. B." required />
+      </div>
+
+      <div class="form-group col-lg-3">
+        <label for="lastName" class="form-label mt-4">Last Name</label>
+        <input value="<%= lastName %>" type="text" class="form-control" name="lastName" id="lastName" placeholder="e.g. Carranza" required />
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-4">
+        <label for="email" class="form-label mt-4">Email address</label>
+        <input value="<%= email %>" class="form-control <%= emailStatus %>" name="email" id="email" placeholder="Enter email" required />
+        <div class="invalid-feedback">
+          Sorry, that username's taken. Try another?
+        </div>
+        <div class="valid-feedback">
+          Sorry, that username's taken. Try another?
+        </div>
+        <!-- required=""
+          oninvalid="this.setCustomValidity('Please enter a valid email')" -->
+      </div>
+      <div class="form-group col-lg-4">
+        <label for="mobileNumber" class="form-label mt-4">Mobile Number</label>
+        <input value="<%= mobileNumber %>" name="mobileNumber" class="form-control" id="mobileNumber" placeholder="e.g. 091234567" required />
+      </div>
+
+      <div class="form-group col-lg-4">
+        <label for="password" class="form-label mt-4">Password</label>
+        <input value="<%= password %>" name="password" class="form-control" id="password" placeholder="Secret" required />
+      </div>
+    </div>
+    <br />
+  </form>
+</div>
+
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 0; right: 0" id="tostado">
+  <div class="toast-header">
+    <strong class="me-auto">Bootstrap</strong>
+    <small>11 mins ago</small>
+    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="toast-body">Hello, world! This is a toast message.</div>
+</div>
+
+<script>
+  var x = document.getElementById("tostado");
+  console.log(x);
+
+  var y = new bootstrap.Toast(x);
+  console.log(y);
+  y.show();
+</script>

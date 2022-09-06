@@ -1,0 +1,171 @@
+<title>Curriculum</title>
+
+<div class="navigationBar">
+  <nav>
+    <ul>
+      <li>
+        <h1>PASS COLLEGE PORTAL</h1>
+      </li>
+
+      <li><a href="/dashboard" class="tabs">Dashboard</a></li>
+
+      <li><a href="/account" class="tabs">Account</a></li>
+      <li><a href="/log-in" class="tabs">Logout </a></li>
+    </ul>
+  </nav>
+</div>
+<a class="" href="/menu" style="text-decoration: none">
+  <button type="button" class="btn btn-outline-primary m-3">
+    Go back to Menu
+  </button>
+</a>
+<ol class="breadcrumb p-2">
+  <li class="breadcrumb-item"><a href="/menu">Menu</a></li>
+  <li class="breadcrumb-item active">Curriculums</li>
+</ol>
+
+<!-- FIXME: Redesign list-->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="sidebar col-lg-3">
+      <div class="accordion" id="listCon">
+        <h1>Curriculum Subjects</h1>
+
+        <%- include("./partials/curriculumListParts/accordions") %> 
+      
+       
+      </div>
+    </div>
+
+    <div class="col-lg-9">
+      <div class="container">
+        <div class="row">
+          <button
+            type="button"
+            class="btn btn-success col-3"
+            data-bs-toggle="modal"
+            data-bs-target="#addNewCurriculum"
+          >
+            Create New Curriculum
+          </button>
+
+          <form class="d-flex col">
+            <input
+              class="form-control me-sm-2"
+              type="text"
+              placeholder="Search"
+            />
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+      <hr />
+    <div class="container">
+        <table class="table table-hover">
+          <h2>1st Semester</h2>
+
+          <thead>
+            <tr>
+              <th scope="col">Subject Code</th>
+              <th scope="col">Subject Description</th>
+              <th scope="col">Units</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">-</th>
+              <td>N/A</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-hover">
+          <h2>2nd Semester</h2>
+          <thead>
+            <tr>
+              <th scope="col">Subject Code</th>
+              <th scope="col">Subject Description</th>
+              <th scope="col">Units</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">-</th>
+              <a href="/log-in">
+                <td>jkalk</td>
+              </a>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-hover">
+          <h2>Mid Year</h2>
+          <thead>
+            <tr>
+              <th scope="col">Subject Code</th>
+              <th scope="col">Subject Description</th>
+              <th scope="col">Units</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">-</th>
+
+              <td>N/A</td>
+
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>   
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VIEW FOR ADDING NEW CURRICULUM -->
+<form method="POST" action="/curriculum">
+  <div class="modal" id="addNewCurriculum">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Curriculum</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!--  -->
+          <%- include ("addCurriculumbody") %>
+          <!---->
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-custom">Create</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  let error = "<%= error%>";
+  if (error) {
+    addNew = document.getElementById("addNewCurriculum");
+    const toggle = new bootstrap.Modal(addNew);
+    toggle.show();
+  }
+</script>
