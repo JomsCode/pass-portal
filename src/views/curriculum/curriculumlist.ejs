@@ -1,19 +1,8 @@
 <title>Curriculum</title>
 
-<div class="navigationBar">
-  <nav>
-    <ul>
-      <li>
-        <h1>PASS COLLEGE PORTAL</h1>
-      </li>
+<%- include("../navbar/navbarMain") %> 
 
-      <li><a href="/dashboard" class="tabs">Dashboard</a></li>
 
-      <li><a href="/account" class="tabs">Account</a></li>
-      <li><a href="/log-in" class="tabs">Logout </a></li>
-    </ul>
-  </nav>
-</div>
 <a class="" href="/menu" style="text-decoration: none">
   <button type="button" class="btn btn-outline-primary m-3">
     Go back to Menu
@@ -28,14 +17,28 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="sidebar col-lg-3">
-      <div class="accordion" id="listCon">
-        <h1>Curriculum Subjects</h1>
 
-        <%- include("./partials/curriculumListParts/accordions") %> 
-      
-       
-      </div>
+    
+    <div class="sidebar col-lg-3">
+        <form action="/curriculum/show" method="POST">
+          <div class="accordion" id="listCon">
+
+            <h4>Curriculum Subjects</h4>
+            <div class="form-group">
+              <label for="exampleSelect1" class="form-label mt-4">Academic year</label>
+              <select class="form-select" id="exampleSelect1" name="academicYear">
+                <option>2018-2019</option>
+              
+              </select>
+            </div>
+            <br>
+
+            <%- include("./partials/curriculumListParts/accordions") %> 
+          
+          
+          </div>
+        </form>
+
     </div>
 
     <div class="col-lg-9">
@@ -56,74 +59,22 @@
               type="text"
               placeholder="Search"
             />
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+            <button class="btn btn-secondary my-2 my-sm-0" type="button">
               Search
             </button>
           </form>
         </div>
       </div>
       <hr />
-    <div class="container">
-        <table class="table table-hover">
-          <h2>1st Semester</h2>
 
-          <thead>
-            <tr>
-              <th scope="col">Subject Code</th>
-              <th scope="col">Subject Description</th>
-              <th scope="col">Units</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">-</th>
-              <td>N/A</td>
-              <td>N/A</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table table-hover">
-          <h2>2nd Semester</h2>
-          <thead>
-            <tr>
-              <th scope="col">Subject Code</th>
-              <th scope="col">Subject Description</th>
-              <th scope="col">Units</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">-</th>
-              <a href="/log-in">
-                <td>jkalk</td>
-              </a>
-              <td>N/A</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table table-hover">
-          <h2>Mid Year</h2>
-          <thead>
-            <tr>
-              <th scope="col">Subject Code</th>
-              <th scope="col">Subject Description</th>
-              <th scope="col">Units</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">-</th>
-
-              <td>N/A</td>
-
-              <td>N/A</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>   
+      <%- include("./partials/curriculumListParts/table") %> 
+      
     </div>
   </div>
 </div>
+
+
+
 
 <!-- MODAL VIEW FOR ADDING NEW CURRICULUM -->
 <form method="POST" action="/curriculum/createNew">
@@ -162,8 +113,11 @@
 </form>
 
 <script>
-  let error = "<%= error%>";
-  if (error) {
+
+
+
+
+  if (<%= error%>) {
     addNew = document.getElementById("addNewCurriculum");
     const toggle = new bootstrap.Modal(addNew);
     toggle.show();

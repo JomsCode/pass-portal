@@ -18,24 +18,33 @@ let yearLevel = ["1st year","2nd year", "3rd year","4th year"];
 <div class="accordion-item">
   <h2 class="accordion-header" id="heading<%- courseAcronymList[index]%> ">
     <button
+      
       class="accordion-button collapsed"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#<%- courseAcronymList[index]%>"
       aria-controls="<%- courseAcronymList[index]%>"
       aria-expanded="false"
-      onclick="">
+      
+
+      >
       <%- item %> 
   </h2>
+  
+  
   <div
+  
     id="<%- courseAcronymList[index]%>"
     class="accordion-collapse collapse"
-    aria-labelledby="heading<%-courseAcronymList[index]%>"
+    aria-labelledby="heading<%- courseAcronymList[index]%>"
     data-bs-parent="#listCon"
+    
   >
     <div class="list-group">
+      
+
       <% yearLevel.forEach((item)=>{%>
-        <button type="submit" class="list-group-item list-group-item-action"> <%- item %> </button>
+        <button type="submit" name="courseAndYear" value="<%- courseAcronymList[index] %> <%- item%>" class="list-group-item list-group-item-action"> <%- item %> </button>
     <%  }) %> 
     
     </div>
@@ -43,3 +52,5 @@ let yearLevel = ["1st year","2nd year", "3rd year","4th year"];
 </div>
 
 <%});%>
+
+

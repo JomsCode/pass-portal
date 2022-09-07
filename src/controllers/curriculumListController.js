@@ -1,17 +1,41 @@
 
 const subject = require("../services/addingSubjectService")
 const connection = require("../config/database_Main_Connection");
-const curriculumService = require("../services/curriculumService")
+const curriculumService = require("../services/curriculumService");
+
+const { query } = require("express");
 let view = (req, res) => {
 
   return res.render("curriculum/curriculumlist", {
     error: req.flash("error"),
     acad_year: req.flash("year"),
-    course: req.flash("course_assigned")
+    course: req.flash("course_assigned"),
+    results: req.flash("results"),
+    errorOnTable: req.flash("errorOnTable")
   });
 };
 
 
+
+let showList = async (req, res) => {
+  // console.log(req.body);
+  let acadYear = req.body.academicYear;
+  let course = req.body.courseAndYear.split(" ")[0]
+  let year = req.body.courseAndYear.split(" ")[1]
+  try {
+    await curriculumService.show(course, acadYear, year).then(value => {
+      req.flash("error", false);
+      req.flash("results", value);
+      return res.redirect("/curriculum");
+    });
+
+  } catch (e) {
+    console.log("error: ", e)
+    req.flash("errorOnTable", e)
+    return res.redirect("/curriculum");
+  }
+
+}
 
 let addNewCurriculum = async (req, res) => {
 
@@ -30,7 +54,7 @@ let addNewCurriculum = async (req, res) => {
 
   } catch (error) {
     req.flash("error", error)
-    console.log(error)
+    // console.log(error)
 
     req.flash("course_assigned", req.body.course);
     req.flash("year", req.body.acadYear);
@@ -45,12 +69,7 @@ let addNewCurriculum = async (req, res) => {
 
 
 
-
 let addNewSubjectPage = (req, res) => {
-
-
-
-
   return res.render("curriculum/addNewSubject", {
 
 
@@ -69,6 +88,8 @@ let addNewSubjectPage = (req, res) => {
 
   });
 };
+
+
 
 let addNewSubject = async (req, res) => {
 
@@ -96,9 +117,12 @@ let addNewSubject = async (req, res) => {
   }
 }
 
+
+
 module.exports = {
   pageView: view,
   addNewCurriculum: addNewCurriculum,
   addNewSubjectView: addNewSubjectPage,
-  addNewSubject: addNewSubject
+  addNewSubject: addNewSubject,
+  show: showList
 };

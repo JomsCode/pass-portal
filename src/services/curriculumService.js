@@ -112,6 +112,46 @@ let checkCurriculum = (tableName) => {
 
     })
 }
+
+
+
+
+let show = (course, academicYear, yearLevel) => {
+    return new Promise(async (resolve, reject) => {
+
+        try {
+            let query = `SELECT table_name FROM curriculums WHERE course_assigned ='${course}' AND year = '${academicYear}'`
+            connection.query(query, function (err, results) {
+                if (err) throw err;
+
+                console.log(results);
+                if (results.length < 1) {
+                    reject("Still no curriculum are made in here");
+                } else {
+
+
+                    connection.query(`SELECT * FROM ${results[0].table_name} WHERE year_level= '${yearLevel}'`, function (err, resultsList) {
+                        if (err) throw err;
+
+                        if (resultsList.length > 0) {
+                            resolve(resultsList);
+                        } else {
+                            reject("No subjects are existing here");
+                        }
+                    })
+                }
+
+            })
+        } catch (e) {
+            reject(e)
+            console.log(e)
+        }
+
+
+    })
+
+}
 module.exports = {
-    createNew: createNew
+    createNew: createNew,
+    show: show
 }
