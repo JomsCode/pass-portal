@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "devHttps": "nodemon src/bin/www",
+    
+    "dev": "nodemon src/bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jomar",

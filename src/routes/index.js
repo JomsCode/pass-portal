@@ -73,7 +73,10 @@ const init = (app) => {
 
 
   router.get("/curriculum/addNewSubject", routes.Curriculum.addNewSubjectView);
-  router.post("/curriculum/addNewSubject", routes.Curriculum.addNewSubject);
+
+  router.post("/curriculum/saveNewSubject", routes.Curriculum.saveNewSubject);
+
+  router.post("/curriculum/addNewSubject", routes.Curriculum.addNewSubject)
 
   router.get("/staff", routes.Staff.pageView);
   router.get("/staff/addNewStaff", routes.Curriculum.addNewSubjectView);
