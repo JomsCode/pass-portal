@@ -1,16 +1,14 @@
 const connection = require("../config/database_Main_Connection");
 
-let createNew = (course, year, acadYear) => {
+let createNew = (course, year, academicYear) => {
     return new Promise(async (resolve, reject) => {
         try {
 
             let tableName = `${course}_curriculum_${year}`
             console.log(tableName)
-            let check = await checkCurriculum(tableName);
-            if (check != true) {
-                reject(check);
-            }
-            else {
+            let check = await checkCurriculum(tableName, course.toUpperCase(), academicYear);
+            console.log(check);
+            if (!check) {
                 let query =
                     `CREATE TABLE ${course}_curriculum_${year}(
                      subject_code VARCHAR(16) NOT NULL , 
@@ -30,12 +28,12 @@ let createNew = (course, year, acadYear) => {
                         let newCurriculum = {
                             table_name: `${course}_curriculum_${year}`,
                             course_assigned: course.toUpperCase(),
-                            year: acadYear
+                            year: academicYear
                         };
                         let query = `INSERT INTO curriculums SET ?`;
                         // let query = 'INSERT INTO `curriculums` (`table_name`, `course_assigned`, `year`) VALUES ('bsa_18_19', 'bsa', '2018-2019');'
                         connection.query(query, newCurriculum, function (err) {
-                            if (err) reject(err)
+                            if (err) reject(err);
                         })
                         resolve("The Curriculum has been successfully created")
                     }
@@ -45,6 +43,8 @@ let createNew = (course, year, acadYear) => {
 
 
             }
+            console.log("wtf")
+
         } catch (error) {
             reject(error);
             console.log(error);
@@ -54,58 +54,25 @@ let createNew = (course, year, acadYear) => {
     })
 }
 
-let checkCurriculum = (tableName) => {
+let checkCurriculum = (tableName, course, academicYear) => {
 
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
 
         try {
 
-            connection.query(`SELECT * FROM ${tableName}`, function (err, rows) {
-                let checkTable;
+            let isOnList = await checkOnList(tableName);
+            let isTableExist = await checkTable(tableName);
 
-                if (err) {
+            if (!isOnList && !isTableExist) {
+                resolve(false)
+            } else if (!isTableExist && isOnList) {
+                reject(`There's a problem in database,the ${course} AY ${academicYear} was on the list of curriculums table but it's own table are missing on the database`);
 
-                    checkTable = false;
-
-                }
-                else {
-                    checkTable = true;
-                }
-                console.log("checkTable: ", checkTable);
-
-                connection.query("SELECT * FROM curriculums WHERE table_name = ? ", tableName,
-                    function (err, rows) {
-                        let checkList;
-
-                        if (err) {
-                            checkList = false;
-                        }
-
-
-                        checkList = (rows.length > 0) ? true : false;
-
-                        // console.log("checkList: ", checkList);
-                        // console.log("checkTable: ", checkTable);
-
-                        if (!checkTable && !checkList) {
-
-
-                            resolve(true);
-                        } else if (checkTable && !checkList) {
-                            resolve("This table has been already in the database but not listed on Curriculum list. Kindly refer to admin to fix this problem")
-
-                        } else if (checkList && !checkTable) {
-                            resolve("This table has been already in Curriculum list but not added on Database. Kindly refer to admin to fix this problem")
-
-                        } else if (checkTable && checkList) {
-                            resolve("This table has been already created")
-                        }
-
-                    });
-            });
-
-
-
+            } else if (isTableExist && isOnList) {
+                reject(`Curriculum for ${course} AY ${academicYear} were already made`);
+            }
+            if (!isTableExist)
+                resolve(false);
         } catch (e) {
             reject(e)
         }
@@ -145,51 +112,20 @@ let show = (tableName, course, academicYear, yearLevel) => {
 
 
             }
-            console.log(isOnList, isTableExist);
+            // console.log(isOnList, isTableExist);
             if (isOnList && isTableExist) {
-                let query = `SELECT * FROM ${tableName} WHERE year_level= '${yearLevel}' ORDER BY 'subject_description' ASC`;
+                let query = `SELECT * FROM ${tableName} WHERE year_level= '${yearLevel}' ORDER BY subject_description ASC`;
 
                 connection.query(query, function (error, resultsList) {
                     if (error) throw error;
-                    resolve(resultsList)
+                    resolve(resultsList);
+
 
 
                 })
 
 
             }
-
-
-
-            // let query = `SELECT table_name FROM curriculums WHERE course_assigned ='${course}' AND year = '${academicYear}'`
-            // let query = `SELECT table_name FROM curriculums WHERE table_name = ${tableName}`
-            // connection.query(query, function (err, results) {
-            //     if (err) throw err;
-
-            //     console.log("Results: ", results);
-            //     if (results.length < 1) {
-            //         reject("No curriculum are made in here");
-            //     } else {
-
-            //         let query = `SELECT * FROM ${results[0].table_name} WHERE year_level= '${yearLevel}' ORDER BY 'subject_description' ASC`
-            //         connection.query(query, function (error, resultsList) {
-            //             console.log(error)
-            //             if (error) {
-            //                 if (error.code == "ER_NO_SUCH_TABLE") {
-            //                     reject(`There's a problem in database,the ${course} ${academicYear} was on the list of curriculums table but it's own table are missing on the database`);
-            //                 }
-            //             }
-            //             // if (err) throw err;
-
-            //             if (resultsList.length > 0) {
-            //                 resolve(resultsList);
-            //             } else {
-            //                 resolve("No subjects are existing here");
-            //             }
-            //         })
-            //     }
-
-            // })
         } catch (e) {
             console.log(e)
             reject(e)
@@ -223,6 +159,9 @@ let checkOnList = (tableName) => {
 
     })
 }
+
+
+
 let checkTable = (tableName) => {
     return new Promise((resolve, reject) => {
         try {
@@ -240,8 +179,6 @@ let checkTable = (tableName) => {
 
                     resolve(true)
                 }
-
-
 
             });
 

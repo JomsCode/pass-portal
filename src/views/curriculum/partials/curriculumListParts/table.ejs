@@ -1,14 +1,19 @@
 <div class="container">
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center ">
     <h3><%= courseOnTable %> <%= academicYear %></h3>
+    
   </div>
   <hr />
-  <div class="d-flex justify-content-center">
-    <% if(errorOnTable.length>0){%>
-    <h2><%= errorOnTable[0] %></h2>
+  <div class="d-flex justify-content-center ">
+  <h4> <%= yearLevel %> Year</h4>
+</div>
+  <!-- <div class="d-flex justify-content-center">
+    <% //if(errorOnTable.length>0){%>
+    <h2><%=// errorOnTable[0] %></h2>
 
-    <% } %>
-  </div>
+    <% //} %>
+  </div> -->
+
   <% if(errorOnTable[0] != "No curriculum are made in here"){%>
     <form action="/curriculum/addNewSubject" method="POST">
       <button type="submit" class="btn btn-success col-2">
@@ -29,6 +34,7 @@
         <th scope="col">Subject Code</th>
         <th scope="col">Subject Description</th>
         <th scope="col">Units</th>
+        <th scope="col"></th>
       </tr>
     </thead>
 
@@ -37,62 +43,99 @@
       <% if(results){%>
       <!--  -->
       <% results.forEach(item=>{ %>
-      <% if(item.semester == "1st") {%>
-      <tr>
-        <th scope="row"><%- item.subject_code %></th>
-        <td><%- item.subject_description %></td>
-        <td>
-          <%- item.units %>
-          <button type="submit" class="btn btn-info l-2">Edit</button>
-        </td>
-      </tr>
+        <% if(item.semester == "1st") {%>
 
-      <% }}) } %>
+        <tr>
+          <th scope="row"><%- item.subject_code %></th>
+          <td><%- item.subject_description %></td>
+          <td>
+            <%- item.units %>
+          </td>
+          <td>
+            
+            <button type="submit" class="btn btn-info l-2">Edit</button>
+          </td>
+        </tr>
+        <% } %> 
+      <% }) } %>
 
+     
+  
+        
       <!--  -->
     </tbody>
   </table>
 
-  <!-- <table class="table table-hover">
-      <h2>2nd Semester</h2>
-      <thead>
-        <tr>
-          <th scope="col">Subject Code</th>
-          <th scope="col">Subject Description</th>
-          <th scope="col">Units</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">-</th>
-          <a href="/log-in">
-            <td>jkalk</td>
-          </a>
-          <td>N/A</td>
-        </tr>
-      </tbody>
-    </table>
-  
-  
-  
-    <table class="table table-hover">
-      <h2>Mid Year</h2>
-      <thead>
-        <tr>
-          <th scope="col">Subject Code</th>
-          <th scope="col">Subject Description</th>
-          <th scope="col">Units</th>
-        </tr>
-      </thead>
+  <table class="table table-hover">
+    <div class="container">
+      <div class="row">
+        <h4 class="col-10">2nd Semester</h4>
+      </div>
+    </div>
+    <thead>
+      <tr>
+        <th scope="col">Subject Code</th>
+        <th scope="col">Subject Description</th>
+        <th scope="col">Units</th>
+      </tr>
+    </thead>
+    <tbody>
 
-      <tbody>
+      <% if(results){%>
+      <!--  -->
+      <% results.forEach(item=>{ %>
+        <% if(item.semester == "2nd"){ %>
+
         <tr>
-          <th scope="row">-</th>
-
-          <td>N/A</td>
-
-          <td>N/A</td>
+          <th scope="row"><%- item.subject_code %></th>
+          <td><%- item.subject_description %></td>
+          <td>
+            <%- item.units %>
+            <button type="submit" class="btn btn-info l-2">Edit</button>
+          </td>
         </tr>
-      </tbody>
-    </table> -->
+        <% } %> 
+      <% }) %>
+    <%} %>
+
+     
+  
+        
+      <!--  -->
+    </tbody>
+  </table>
+  <table class="table table-hover">
+    <div class="container">
+      <div class="row">
+        <h4 class="col-10">Summer Class</h4>
+      </div>
+    </div>
+    <thead>
+      <tr>
+        <th scope="col">Subject Code</th>
+        <th scope="col">Subject Description</th>
+        <th scope="col">Units</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% if(results){%>
+      <!--  -->
+      <% results.forEach(item=>{ %>
+        <% if(item.semester == "Summer Class") {%>
+
+        <tr>
+          <th scope="row"><%- item.subject_code %></th>
+          <td><%- item.subject_description %></td>
+          <td>
+            <%- item.units %>
+            <button type="submit" class="btn btn-info l-2">Edit</button>
+          </td>
+        </tr>
+        <% } %> 
+      <% }) %>
+    <%} %>
+    </tbody>
+  </table>
 </div>

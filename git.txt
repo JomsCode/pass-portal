@@ -45,3 +45,32 @@ git push -u origin main
 remotely updating files on local repository
 
 git pull origin main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <tr>
+        <th scope="row"><%- item.subject_code %></th>
+        <td><%- item.subject_description %></td>
+        <td>
+          <%- item.units %>
+          <button type="submit" class="btn btn-info l-2">Edit</button>
+        </td>
+      </tr>

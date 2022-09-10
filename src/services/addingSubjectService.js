@@ -16,8 +16,8 @@ let addingNewSubject = (subject, tableName) => {
 
 
         let subjectItem = {
-          subject_code: subject.subjectCode,
-          subject_description: subject.subjectDescription,
+          subject_code: subject.subjectCode.trim(),
+          subject_description: subject.subjectDescription.trim(),
           units: subject.units,
           // curriculum_year: subject.year,
           // course_assigned: subject.course,

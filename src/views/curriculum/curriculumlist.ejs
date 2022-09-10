@@ -114,10 +114,11 @@
 
 <script>
 
+console.log("error on ejs:","<%= error%>")
+console.log("working")
 
 
-
-  if (<%= error%>) {
+  if ("<%= error%>" != []) {
     addNew = document.getElementById("addNewCurriculum");
     const toggle = new bootstrap.Modal(addNew);
     toggle.show();

@@ -1,6 +1,6 @@
 
 const subject = require("../services/addingSubjectService")
-const connection = require("../config/database_Main_Connection");
+// const connection = require("../config/database_Main_Connection");
 const curriculumService = require("../services/curriculumService");
 
 // const { query } = require("express");
@@ -21,10 +21,11 @@ let view = async (req, res) => {
 
   if (req.session.academicYear == undefined) req.session.academicYear = "2018-2019";
 
-  if (req.session.yearLevel == undefined) req.session.yearLevel = "1st year";
+  if (req.session.yearLevel == undefined) req.session.yearLevel = "1st";
   if (req.session.tableName == undefined) {
     req.session.tableName = `${req.session.course.toLowerCase()}_curriculum_${preciseYear(req.session.academicYear)}`
   }
+
   let course = req.session.course;
   let academicYear = req.session.academicYear;
   let yearLevel = req.session.yearLevel;
@@ -32,7 +33,7 @@ let view = async (req, res) => {
 
   try {
     await curriculumService.show(tableName, course, academicYear, yearLevel).then(value => {
-      req.flash("error", false);
+
       if (typeof (value) == "string") {
         req.flash("errorOnTable", value)
 
@@ -49,32 +50,21 @@ let view = async (req, res) => {
     console.log("error: ", e)
     req.flash("errorOnTable", e)
     req.session.results = null;
-    // return res.redirect("/curriculum");
-    // return res.render("curriculum/curriculumlist", {
-    //   error: req.flash("error"),
-    //   acad_year: req.flash("year"),
-    //   course: req.flash("course_assigned"),
-    //   // results: req.flash("results"),
-    //   results: req.session.results,
-    //   errorOnTable: req.flash("errorOnTable"),
-    //   academicYear: req.session.academicYear,
-    //   courseOnTable: req.session.course,
-    //   tableName: req.session.tableName
 
-    // });
 
   }
+
 
   return res.render("curriculum/curriculumlist", {
     error: req.flash("error"),
     acad_year: req.flash("year"),
     course: req.flash("course_assigned"),
-    // results: req.flash("results"),
     results: req.session.results,
     errorOnTable: req.flash("errorOnTable"),
     academicYear: req.session.academicYear,
-    courseOnTable: req.session.course,
-    tableName: req.session.tableName
+    courseOnTable: req.session.course.toUpperCase(),
+    tableName: req.session.tableName,
+    yearLevel: req.session.yearLevel
 
   });
 
@@ -171,26 +161,27 @@ let addNewCurriculum = async (req, res) => {
 
 
   let course = req.body.course.toLowerCase();
-  let year = preciseYear(req.body.acadYear)
+  let year = preciseYear(req.body.acadYear);
 
   req.session.course = course;
   req.session.academicYear = req.body.acadYear;
 
   try {
     await curriculumService.createNew(course, year, req.body.acadYear).then((value) => {
-      req.flash("successInfo", value)
-      req.session.currentCurriculumInfo = `${req.body.course} ${req.body.acadYear}`
-      req.session.tableName = `${course}_curriculum_${year}`
+      req.flash("successInfo", value);
+
+      req.session.currentCurriculumInfo = `${req.body.course} ${req.body.acadYear}`;
+      req.session.tableName = `${course}_curriculum_${year}`;
 
 
-      return res.redirect("/curriculum/addNewSubject")
+      return res.redirect("/curriculum/addNewSubject");
 
     })
 
 
   } catch (error) {
     req.flash("error", error)
-    // console.log(error)
+
 
     // req.flash("course_assigned", req.body.course);
     // req.flash("year", req.body.acadYear);
