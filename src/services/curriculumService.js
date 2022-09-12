@@ -114,7 +114,7 @@ let show = (tableName, course, academicYear, yearLevel) => {
             }
             // console.log(isOnList, isTableExist);
             if (isOnList && isTableExist) {
-                let query = `SELECT * FROM ${tableName} WHERE year_level= '${yearLevel}' ORDER BY subject_description ASC`;
+                let query = `SELECT * FROM ${tableName} WHERE year_level= '${yearLevel}' ORDER BY subject_code ASC`;
 
                 connection.query(query, function (error, resultsList) {
                     if (error) throw error;

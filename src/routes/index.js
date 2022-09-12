@@ -69,8 +69,12 @@ const init = (app) => {
   );
 
   router.post("/curriculum/createNew", routes.Curriculum.addNewCurriculum);
-  router.post("/curriculum/show", routes.Curriculum.show);
 
+  router.post("/curriculum/edit", routes.Curriculum.editInfo);
+
+  router.post("/curriculum/delete", routes.Curriculum.deleteSubject);
+
+  router.post("/curriculum/show", routes.Curriculum.show);
 
   router.get("/curriculum/addNewSubject", routes.Curriculum.addNewSubjectView);
 

@@ -36,6 +36,9 @@
   --bs-gray-800: #333;
   --bs-gray-900: #222;
   --bs-primary: #eb6864;
+  /*  INFO  Custom Color*/
+  --bs-custom: #F7CC32;
+
   --bs-secondary: #aaa;
   --bs-success: #22b24c;
   --bs-info: #369;
@@ -44,6 +47,9 @@
   --bs-light: #f8f9fa;
   --bs-dark: #222;
   --bs-primary-rgb: 235, 104, 100;
+  /* INFO custom color */
+  --bs-custom-rgb: 247, 204, 50;
+
   --bs-secondary-rgb: 170, 170, 170;
   --bs-success-rgb: 34, 178, 76;
   --bs-info-rgb: 51, 102, 153;
@@ -2811,6 +2817,7 @@ fieldset:disabled .btn {
   --bs-btn-disabled-border-color: #eb6864;
 }
 
+/* INFO Custom Button Color */
 .btn-custom {
   --bs-btn-color: #000;
   --bs-btn-bg: #f7cc32;
@@ -7815,6 +7822,17 @@ fieldset:disabled .btn {
     var(--bs-bg-opacity)
   ) !important;
 }
+
+/* INFO CUSTOM COLOR */
+.bg-custom {
+  --bs-bg-opacity: 1;
+  background-color: rgba(
+    var(--bs-custom-rgb),
+    var(--bs-bg-opacity)
+  ) !important;
+}
+
+
 .bg-secondary {
   --bs-bg-opacity: 1;
   background-color: rgba(

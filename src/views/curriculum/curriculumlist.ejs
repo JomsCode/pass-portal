@@ -1,7 +1,6 @@
 <title>Curriculum</title>
 
-<%- include("../navbar/navbarMain") %> 
-
+<%- include("../navbar/navbarMain") %>
 
 <a class="" href="/menu" style="text-decoration: none">
   <button type="button" class="btn btn-outline-primary m-3">
@@ -17,28 +16,23 @@
 
 <div class="container-fluid">
   <div class="row">
-
-    
     <div class="sidebar col-lg-3">
-        <form action="/curriculum/show" method="POST">
-          <div class="accordion" id="listCon">
-
-            <h4>Curriculum Subjects</h4>
-            <div class="form-group">
-              <label for="exampleSelect1" class="form-label mt-4">Academic year</label>
-              <select class="form-select" id="exampleSelect1" name="academicYear">
-                <option>2018-2019</option>
-              
-              </select>
-            </div>
-            <br>
-
-            <%- include("./partials/curriculumListParts/accordions") %> 
-          
-          
+      <form action="/curriculum/show" method="POST">
+        <div class="accordion" id="listCon">
+          <h4>Curriculum Subjects</h4>
+          <div class="form-group">
+            <label for="exampleSelect1" class="form-label mt-4"
+              >Academic year</label
+            >
+            <select class="form-select" id="exampleSelect1" name="academicYear">
+              <option>2018-2019</option>
+            </select>
           </div>
-        </form>
+          <br />
 
+          <%- include("./partials/curriculumListParts/accordions") %>
+        </div>
+      </form>
     </div>
 
     <div class="col-lg-9">
@@ -67,14 +61,10 @@
       </div>
       <hr />
 
-      <%- include("./partials/curriculumListParts/table") %> 
-      
+      <%- include("./partials/curriculumListParts/table") %>
     </div>
   </div>
 </div>
-
-
-
 
 <!-- MODAL VIEW FOR ADDING NEW CURRICULUM -->
 <form method="POST" action="/curriculum/createNew">
@@ -112,11 +102,11 @@
   </div>
 </form>
 
+<%- include("./partials/curriculumListParts/edit") %>
+
 <script>
-
-console.log("error on ejs:","<%= error%>")
-console.log("working")
-
+  console.log("error on ejs:", "<%= error%>");
+  console.log("working");
 
   if ("<%= error%>" != []) {
     addNew = document.getElementById("addNewCurriculum");

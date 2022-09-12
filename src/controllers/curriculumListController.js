@@ -1,9 +1,12 @@
 
 const subject = require("../services/addingSubjectService")
-// const connection = require("../config/database_Main_Connection");
+const connection = require("../config/database_Main_Connection");
 const curriculumService = require("../services/curriculumService");
+const subjectService = require("../services/subjectEditService");
 
 // const { query } = require("express");
+
+
 function preciseYear(academicYear) {
 
   let yearSplit = academicYear.split("-");
@@ -53,6 +56,7 @@ let view = async (req, res) => {
 
 
   }
+  let deletePanel = req.flash("deletePanel");
 
 
   return res.render("curriculum/curriculumlist", {
@@ -64,19 +68,87 @@ let view = async (req, res) => {
     academicYear: req.session.academicYear,
     courseOnTable: req.session.course.toUpperCase(),
     tableName: req.session.tableName,
-    yearLevel: req.session.yearLevel
+    yearLevel: req.session.yearLevel,
+    deletePanel: deletePanel,
+    editPanel: req.flash("editPanel"),
+    subjectDescription: req.flash("subjectDescription"),
+
 
   });
 
 
 
+
 }
 
+let editInfo = async (req, res) => {
+  try {
+
+    if (req.body.delete) {
+      await subjectService.checkSubject(req.body.delete, req.session.tableName).then(value => {
+        req.flash("subjectDescription", value[0].subject_description)
+
+        req.flash("deletePanel", true)
+        req.flash("code", req.body.delete);
+
+        return res.redirect("/curriculum")
+      });
+
+
+
+    } else if (req.body.edit) {
+      await subjectService.checkSubject(req.body.edit, req.session.tableName).then(value => {
+        req.flash("subjectEdit", value)
+
+        req.flash("editPanel", true)
+        req.flash("code", req.body.edit);
+
+        return res.redirect("/curriculum")
+      });
+    }
+
+
+  } catch (error) {
+    console.log(error)
+
+  }
+
+}
+
+let deleteSubject = async (req, res) => {
+  try {
+    let subjectCode = req.flash("code");
+    await subjectService.deleteSubject(subjectCode[0], req.session.tableName).then((value => {
+      console.log(value)
+      return res.redirect("/curriculum");
+
+    }))
+  } catch (error) {
+    console.log(error)
+
+  }
+
+}
+let editSubject = async (req, res) => {
+  try {
+    let subjectCode = req.flash("code");
+    await subjectService.editubject(subjectCode[0], req.session.tableName).then((value => {
+      console.log(value)
+      return res.redirect("/curriculum");
+
+    }))
+  } catch (error) {
+    console.log(error)
+
+  }
+
+}
+
+
+
 let showList = (req, res) => {
-  // console.log(req.body);
+
   let academicYear = req.body.academicYear;
-  // let yearSplit = req.body.academicYear.split("-");
-  // let year = `${yearSplit[0].slice(-2)}_${yearSplit[1].slice(-2)}`
   let year = preciseYear(req.session.academicYear);
 
   let course = req.body.courseAndYear.split(" ")[0]
@@ -92,9 +164,6 @@ let showList = (req, res) => {
   res.redirect("/curriculum")
 
 }
-
-
-
 
 
 let addNewSubjectPage = (req, res) => {
@@ -144,7 +213,6 @@ let saveNewSubject = async (req, res) => {
     return res.redirect("/curriculum/addNewSubject");
   } catch (error) {
 
-    console.log("wtf");
     req.flash("info", error);
     req.flash("success", false);
     for (i = 0; i < Object.entries(newSubject).length; i++) {
@@ -180,11 +248,11 @@ let addNewCurriculum = async (req, res) => {
 
 
   } catch (error) {
+    req.flash("course_assigned", req.body.course);
+    req.flash("year", req.body.acadYear);
     req.flash("error", error)
 
 
-    // req.flash("course_assigned", req.body.course);
-    // req.flash("year", req.body.acadYear);
 
     return res.redirect("/curriculum")
   }
@@ -199,5 +267,7 @@ module.exports = {
   addNewSubjectView: addNewSubjectPage,
   saveNewSubject: saveNewSubject,
   addNewSubject: addNewSubject,
-  show: showList
+  show: showList,
+  editInfo: editInfo,
+  deleteSubject: deleteSubject
 };

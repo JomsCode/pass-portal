@@ -1,8 +1,16 @@
+
 <div class="container">
   <div class="d-flex justify-content-center ">
     <h3><%= courseOnTable %> <%= academicYear %></h3>
     
   </div>
+  <% if(errorOnTable[0] != "No curriculum are made in here"){%>
+    <form action="/curriculum/addNewSubject" method="POST">
+      <button type="submit" class="btn btn-success col-2">
+        Add Subject
+      </button>
+    </form>
+    <% } %>
   <hr />
   <div class="d-flex justify-content-center ">
   <h4> <%= yearLevel %> Year</h4>
@@ -14,13 +22,10 @@
     <% //} %>
   </div> -->
 
-  <% if(errorOnTable[0] != "No curriculum are made in here"){%>
-    <form action="/curriculum/addNewSubject" method="POST">
-      <button type="submit" class="btn btn-success col-2">
-        Add Subject
-      </button>
-    </form>
-    <% } %>
+ 
+
+
+    <form action="/curriculum/edit" method="POST">
   <table class="table table-hover">
     <div class="container">
       <div class="row">
@@ -29,7 +34,7 @@
     
       </div>
     </div>
-    <thead>
+    <thead class="table-dark" >
       <tr>
         <th scope="col">Subject Code</th>
         <th scope="col">Subject Description</th>
@@ -46,14 +51,15 @@
         <% if(item.semester == "1st") {%>
 
         <tr>
-          <th scope="row"><%- item.subject_code %></th>
+          <th scope="row" id="ip"><%- item.subject_code %></th>
           <td><%- item.subject_description %></td>
           <td>
             <%- item.units %>
           </td>
           <td>
             
-            <button type="submit" class="btn btn-info l-2">Edit</button>
+            <button type="submit" value="<%- item.subject_code %>" name="edit" class=" btn btn-info">Edit</button>
+            <button type="submit" value="<%- item.subject_code %>" name="delete" class=" btn btn-danger">Delete</button>
           </td>
         </tr>
         <% } %> 
@@ -65,6 +71,7 @@
       <!--  -->
     </tbody>
   </table>
+  </form>
 
   <table class="table table-hover">
     <div class="container">
@@ -139,3 +146,5 @@
     </tbody>
   </table>
 </div>
+
+
