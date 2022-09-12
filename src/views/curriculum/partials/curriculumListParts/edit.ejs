@@ -1,0 +1,159 @@
+<!-- INFO Delete Panel -->
+<form method="POST" action="/curriculum/delete">
+  <div class="modal" id="deleteSubject">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Delete <%= subjectDescription[0] %> subject?
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you wanna delete <%= subjectDescription[0] %> from <%=
+          courseOnTable %> <%= academicYear %>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-custom">Yes</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- INFO EDIT SUBJECT -->
+
+<form method="POST" action="/curriculum/edit">
+  <div class="modal" id="editSubject">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Delete <%= // subjectDescription[0] %> subject?
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <!--  -->
+
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group col-lg-6">
+              <label for="year_level" class="form-label mt-4">Year Level</label>
+              <select
+                value="<%=// year_level %>"
+                class="form-select"
+                id="year_level"
+                name="year_level"
+              >
+                <%- include("./editParts/year_LevelSelect") %>
+              </select>
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="semesters" class="form-label mt-4">Semester</label>
+              <select
+                value="<%= //semester %>"
+                class="form-select"
+                id="semesters"
+                name="semesters"
+              >
+                <%- include("./editParts/semesterSelect") %>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-lg-4">
+              <label for="subjectCode" class="form-label mt-4"
+                >Subject Code</label
+              >
+              <input
+                class="form-control"
+                value="<%= //subject_code %>"
+                name="subjectCode"
+                id="subjectCode"
+                placeholder="eg AC-GE 2"
+                required
+              />
+            </div>
+
+            <div class="form-group col-lg-4">
+              <label for="subjectDescription" class="form-label mt-4"
+                >Subject Description</label
+              >
+              <input
+                value="<%=// subject_description %>"
+                type="text"
+                class="form-control"
+                name="subjectDescription"
+                id="subjectDescription"
+                placeholder=" e.g. Undertanding the Self"
+                required
+              />
+            </div>
+
+            <div class="form-group col-lg-4">
+              <label for="units" class="form-label mt-4">Units</label>
+              <input
+                value="<%=// units %>"
+                type="number"
+                class="form-control"
+                name="units"
+                id="units"
+                placeholder="e.g. 3"
+                required
+              />
+            </div>
+          </div>
+          <br />
+        </div>
+
+        <!--  -->
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-custom">Save</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  if ("<%= deletePanel%>") {
+    confirmSubject = document.getElementById("deleteSubject");
+    let confirmPanel = new bootstrap.Modal(confirmSubject);
+    confirmPanel.show();
+  }
+  if ("<%= editPanel%>") {
+    editSubject = document.getElementById("editSubject");
+    let editPanel = new bootstrap.Modal(editSubject);
+    editPanel.show();
+  }
+</script>
