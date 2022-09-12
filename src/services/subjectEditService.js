@@ -50,8 +50,28 @@ let deleteSubject = (subjectCode, tableName) => {
     })
 }
 
-let editSubject = () => {
+let editSubject = (subjectCode, tableName, editedDataList) => {
+    return new Promise((resolve, reject) => {
 
+        let subjectItem = {
+            subject_code: editedDataList.subject_code.trim(),
+            subject_description: editedDataList.subject_description.trim(),
+            units: editedDataList.units,
+            year_level: editedDataList.year_level,
+            semester: editedDataList.semesters
+        };
+        let query = `UPDATE ${tableName} SET ? WHERE subject_code ='${subjectCode}'`;
+        connection.query(query, subjectItem, function (err) {
+            if (err) {
+                if (err.code = 'ER_DUP_ENTRY') {
+                    reject(`Duplicate entry for ${subjectCode} | ${subjectItem.subject_description}`);
+                }
+            }
+            resolve("Successfuly Edited");
+
+        });
+
+    })
 }
 
 

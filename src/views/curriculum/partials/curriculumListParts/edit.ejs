@@ -1,5 +1,5 @@
 <!-- INFO Delete Panel -->
-<form method="POST" action="/curriculum/delete">
+<form method="POST" action="/curriculum/edit/delete">
   <div class="modal" id="deleteSubject">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -37,14 +37,12 @@
 
 <!-- INFO EDIT SUBJECT -->
 
-<form method="POST" action="/curriculum/edit">
+<form method="POST" action="/curriculum/edit/save">
   <div class="modal" id="editSubject">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">
-            Delete <%= // subjectDescription[0] %> subject?
-          </h5>
+          <h5 class="modal-title">Edit Subject</h5>
           <button
             type="button"
             class="btn-close"
@@ -58,11 +56,13 @@
         <!--  -->
 
         <div class="modal-body">
+          <%- include("./editParts/errors") %>
+
           <div class="row">
-            <div class="form-group col-lg-6">
+            <div class="form-group col">
               <label for="year_level" class="form-label mt-4">Year Level</label>
               <select
-                value="<%=// year_level %>"
+                value="<%= subject.year_level %>"
                 class="form-select"
                 id="year_level"
                 name="year_level"
@@ -70,10 +70,10 @@
                 <%- include("./editParts/year_LevelSelect") %>
               </select>
             </div>
-            <div class="form-group col-lg-6">
+            <div class="form-group col">
               <label for="semesters" class="form-label mt-4">Semester</label>
               <select
-                value="<%= //semester %>"
+                value="<%= subject.semester %>"
                 class="form-select"
                 id="semesters"
                 name="semesters"
@@ -83,39 +83,39 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-lg-4">
-              <label for="subjectCode" class="form-label mt-4"
+            <div class="form-group">
+              <label for="subject_code" class="form-label mt-4"
                 >Subject Code</label
               >
               <input
                 class="form-control"
-                value="<%= //subject_code %>"
-                name="subjectCode"
-                id="subjectCode"
+                value="<%= subject.subject_code %>"
+                name="subject_code"
+                id="subject_code"
                 placeholder="eg AC-GE 2"
                 required
               />
             </div>
 
-            <div class="form-group col-lg-4">
-              <label for="subjectDescription" class="form-label mt-4"
+            <div class="form-group">
+              <label for="subject_Description" class="form-label mt-4"
                 >Subject Description</label
               >
               <input
-                value="<%=// subject_description %>"
+                value="<%= subject.subject_description %>"
                 type="text"
                 class="form-control"
-                name="subjectDescription"
-                id="subjectDescription"
+                name="subject_description"
+                id="subject_description"
                 placeholder=" e.g. Undertanding the Self"
                 required
               />
             </div>
 
-            <div class="form-group col-lg-4">
+            <div class="form-group">
               <label for="units" class="form-label mt-4">Units</label>
               <input
-                value="<%=// units %>"
+                value="<%= subject.units %>"
                 type="number"
                 class="form-control"
                 name="units"

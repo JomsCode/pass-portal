@@ -1,8 +1,14 @@
-<% const semesters = [ "1st", "2nd", "3rd", "4th" ]; semesters.forEach(item => {
-//if(year_level==item){ %> // // // //
-<option selected><%- //item%></option>
+<% const yearLevel = [ "1st", "2nd", "3rd", "4th" ]; %>
 
-<%//}else{%>
+<!--  -->
+<% yearLevel.forEach(item => {%>
+<!--  -->
+<% if(subject.year_level==item){ %>
+<option selected><%- item%></option>
+
+<%}else{%>
 
 <option><%- item%></option>
-<%//}%> <%})%>
+<%}%>
+<!--  -->
+<%})%>

@@ -24,7 +24,7 @@
             <label for="exampleSelect1" class="form-label mt-4"
               >Academic year</label
             >
-            <select class="form-select" id="exampleSelect1" name="academicYear">
+            <select class="form-select" id="academicYear" name="academicYear">
               <option>2018-2019</option>
             </select>
           </div>
@@ -105,9 +105,6 @@
 <%- include("./partials/curriculumListParts/edit") %>
 
 <script>
-  console.log("error on ejs:", "<%= error%>");
-  console.log("working");
-
   if ("<%= error%>" != []) {
     addNew = document.getElementById("addNewCurriculum");
     const toggle = new bootstrap.Modal(addNew);

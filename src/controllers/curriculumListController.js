@@ -56,8 +56,23 @@ let view = async (req, res) => {
 
 
   }
-  let deletePanel = req.flash("deletePanel");
+  let checkFirstSemester, checkSecondSemester, checkSummerClass;
+  if (req.session.results != null) {
+    checkFirstSemester = checkSemesters("1st", req.session.results);
+    checkSecondSemester = checkSemesters("2nd", req.session.results);
+    checkSummerClass = checkSemesters("Summer Class", req.session.results);
+  }
 
+
+  let deletePanel = req.flash("deletePanel");
+  let subject = req.flash("subject");
+  // console.log("subjects:" + subject.length);
+
+  if (subject.length > 0) {
+    // console.log(subject);
+    subject = subject[0];
+    // console.log(subject.year_level);
+  }
 
   return res.render("curriculum/curriculumlist", {
     error: req.flash("error"),
@@ -65,6 +80,7 @@ let view = async (req, res) => {
     course: req.flash("course_assigned"),
     results: req.session.results,
     errorOnTable: req.flash("errorOnTable"),
+    errorOnEdit: req.flash("errorOnEdit"),
     academicYear: req.session.academicYear,
     courseOnTable: req.session.course.toUpperCase(),
     tableName: req.session.tableName,
@@ -72,6 +88,10 @@ let view = async (req, res) => {
     deletePanel: deletePanel,
     editPanel: req.flash("editPanel"),
     subjectDescription: req.flash("subjectDescription"),
+    subject: subject,
+    checkFirstSemester: checkFirstSemester,
+    checkSecondSemester: checkSecondSemester,
+    checkSummerClass: checkSummerClass
 
 
   });
@@ -80,6 +100,17 @@ let view = async (req, res) => {
 
 
 }
+
+let checkSemesters = (value, list) => {
+  let count = 0;
+  list.forEach(item => {
+    if (value == item.semester) count++
+  })
+
+  return (count > 0) ? true : false;
+
+}
+
 
 let editInfo = async (req, res) => {
   try {
@@ -98,7 +129,7 @@ let editInfo = async (req, res) => {
 
     } else if (req.body.edit) {
       await subjectService.checkSubject(req.body.edit, req.session.tableName).then(value => {
-        req.flash("subjectEdit", value)
+        req.flash("subject", value[0])
 
         req.flash("editPanel", true)
         req.flash("code", req.body.edit);
@@ -119,7 +150,7 @@ let deleteSubject = async (req, res) => {
   try {
     let subjectCode = req.flash("code");
     await subjectService.deleteSubject(subjectCode[0], req.session.tableName).then((value => {
-      console.log(value)
+      // console.log(value)
       return res.redirect("/curriculum");
 
     }))
@@ -130,15 +161,21 @@ let deleteSubject = async (req, res) => {
 
 }
 let editSubject = async (req, res) => {
+  let editedDataList = req.body;
   try {
-    let subjectCode = req.flash("code");
-    await subjectService.editubject(subjectCode[0], req.session.tableName).then((value => {
-      console.log(value)
-      return res.redirect("/curriculum");
 
-    }))
+
+    await subjectService.editSubject(req.flash("code"), req.session.tableName, editedDataList).then(value => {
+      console.log(value);
+      return res.redirect("/curriculum");
+    })
   } catch (error) {
-    console.log(error)
+    req.flash("subject", req.body);
+    req.flash("editPanel", true);
+    req.flash("code", req.body.subjectCode);
+    req.flash("errorOnEdit", error);
+    console.log(error);
+    return res.redirect("/curriculum");
 
   }
 
@@ -269,5 +306,6 @@ module.exports = {
   addNewSubject: addNewSubject,
   show: showList,
   editInfo: editInfo,
-  deleteSubject: deleteSubject
+  deleteSubject: deleteSubject,
+  editSubject: editSubject
 };

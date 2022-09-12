@@ -72,7 +72,9 @@ const init = (app) => {
 
   router.post("/curriculum/edit", routes.Curriculum.editInfo);
 
-  router.post("/curriculum/delete", routes.Curriculum.deleteSubject);
+  router.post("/curriculum/edit/save", routes.Curriculum.editSubject);
+
+  router.post("/curriculum/edit/delete", routes.Curriculum.deleteSubject);
 
   router.post("/curriculum/show", routes.Curriculum.show);
 
