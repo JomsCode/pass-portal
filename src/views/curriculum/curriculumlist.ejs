@@ -25,7 +25,14 @@
               >Academic year</label
             >
             <select class="form-select" id="academicYear" name="academicYear">
-              <option>2018-2019</option>
+              <% academicYearList.forEach((item)=>{%>
+              <!--  -->
+              <% if(academicYear == item.year){ %>
+              <option selected><%- item.year %></option>
+
+              <% }else{ %>
+              <option><%- item.year %></option>
+              <% } }) %>
             </select>
           </div>
           <br />

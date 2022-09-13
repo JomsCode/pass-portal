@@ -48,6 +48,8 @@ let view = async (req, res) => {
 
 
     });
+    req.session.academicYearList = await curriculumService.academicYears();
+
 
   } catch (e) {
     console.log("error: ", e)
@@ -56,12 +58,17 @@ let view = async (req, res) => {
 
 
   }
+
+
   let checkFirstSemester, checkSecondSemester, checkSummerClass;
   if (req.session.results != null) {
     checkFirstSemester = checkSemesters("1st", req.session.results);
     checkSecondSemester = checkSemesters("2nd", req.session.results);
     checkSummerClass = checkSemesters("Summer Class", req.session.results);
   }
+
+
+
 
 
   let deletePanel = req.flash("deletePanel");
@@ -91,8 +98,8 @@ let view = async (req, res) => {
     subject: subject,
     checkFirstSemester: checkFirstSemester,
     checkSecondSemester: checkSecondSemester,
-    checkSummerClass: checkSummerClass
-
+    checkSummerClass: checkSummerClass,
+    academicYearList: req.session.academicYearList
 
   });
 

@@ -8,7 +8,7 @@ let createNew = (course, year, academicYear) => {
             console.log(tableName)
             let check = await checkCurriculum(tableName, course.toUpperCase(), academicYear);
             console.log(check);
-            if (!check) {
+            if (check == false) {
                 let query =
                     `CREATE TABLE ${course}_curriculum_${year}(
                      subject_code VARCHAR(16) NOT NULL , 
@@ -42,6 +42,19 @@ let createNew = (course, year, academicYear) => {
 
 
 
+            } else if (check == true) {
+                let newCurriculum = {
+                    table_name: `${course}_curriculum_${year}`,
+                    course_assigned: course.toUpperCase(),
+                    year: academicYear
+                };
+                let query = `INSERT INTO curriculums SET ?`;
+                // let query = 'INSERT INTO `curriculums` (`table_name`, `course_assigned`, `year`) VALUES ('bsa_18_19', 'bsa', '2018-2019');'
+                connection.query(query, newCurriculum, function (err) {
+                    if (err) reject(err);
+                })
+                resolve("Fixed");
+
             }
             console.log("wtf")
 
@@ -70,6 +83,8 @@ let checkCurriculum = (tableName, course, academicYear) => {
 
             } else if (isTableExist && isOnList) {
                 reject(`Curriculum for ${course} AY ${academicYear} were already made`);
+            } else if (isTableExist && !isOnList) {
+                resolve(true);
             }
             if (!isTableExist)
                 resolve(false);
@@ -112,7 +127,7 @@ let show = (tableName, course, academicYear, yearLevel) => {
 
 
             }
-            // console.log(isOnList, isTableExist);
+            console.log(isOnList, isTableExist);
             if (isOnList && isTableExist) {
                 let query = `SELECT * FROM ${tableName} WHERE year_level= '${yearLevel}' ORDER BY subject_code ASC`;
 
@@ -145,15 +160,17 @@ let checkOnList = (tableName) => {
 
             connection.query(query, function (err, results) {
                 if (err) throw err;
-
+                console.log(results);
                 if (results.length > 0) {
                     resolve(true)
+
                 }
                 else { resolve(false) }
 
             });
 
         } catch (error) {
+
             reject(error)
         }
 
@@ -188,7 +205,20 @@ let checkTable = (tableName) => {
 
     })
 }
+
+
+let academicYears = () => {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT DISTINCT year FROM curriculums", function (err, result) {
+            if (err) throw err;
+
+            resolve(result);
+        })
+    })
+
+}
 module.exports = {
     createNew: createNew,
-    show: show
+    show: show,
+    academicYears: academicYears
 }
