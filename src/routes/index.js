@@ -20,23 +20,22 @@ const init = (app) => {
   //LOG-IN
 
   router.get(
-    "/admin",
+    "/login",
     // routes.Login_Manager.checkLoggedOut,
     routes.Login_Manager.pageView
   );
   router.post(
-    "/admin",
+    "/login",
     passport.authenticate("local", {
       successRedirect: "/menu",
-      failureRedirect: "/admin",
+      failureRedirect: "/login",
       successFlash: true,
       failureFlash: true,
     })
   );
 
   router.get("/logout", routes.Login_Manager.postLogOut);
-  router.get("/instructor", routes.Login_Manager.pageView);
-  router.get("/student", routes.Login_Manager.pageView);
+
 
   //MENU FOR REGISTRAR
 

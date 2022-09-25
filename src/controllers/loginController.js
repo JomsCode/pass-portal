@@ -2,20 +2,10 @@ let path = "";
 let role = "";
 rolepath = "";
 const login = (req, res) => {
-  role = req.path;
-  rolepath = role;
 
-  if (role == "/admin") {
-    role = "Admin";
-  } else if (role == "/instructor") {
-    role = "Instructor";
-  } else {
-    role = "Student";
-  }
 
   return res.render("login", {
-    role: role,
-    rolepath: rolepath,
+
     msg: req.flash("errors"),
   });
 };

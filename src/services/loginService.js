@@ -4,13 +4,14 @@ const bcrypt = require("bcryptjs");
 let findUserBySchoolID = (studentID) => {
   return new Promise((resolve, reject) => {
     try {
-      const roleCheck = /\d{2}-\d{4}/;
-      let sqlQuerry = "";
-      if (roleCheck.test(studentID)) {
-        sqlQuerry = "SELECT * FROM students WHERE student_id =?";
-      } else {
-        sqlQuerry = "SELECT * FROM Admin_users WHERE id = ?";
-      }
+      // const roleCheck = /\d{2}-\d{4}/;
+      // let sqlQuerry = "";
+      // if (roleCheck.test(studentID)) {
+      //   sqlQuerry = "SELECT * FROM students WHERE student_id =?";
+      // } else {
+      //   sqlQuerry = "SELECT * FROM Admin_users WHERE id = ?";
+      // }
+      let sql = "SELECT * FROM students WHERE student_id =?";
 
       connection.query(sql, studentID, (errors, rows) => {
         if (errors) reject(errors);
