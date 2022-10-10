@@ -11,9 +11,9 @@ const connection = mysql.createConnection({
   database: process.env.db_name,
 });
 
-connection.connect(function (error) {
-  if (error) { console.log(error, "\nSET YOUR FCKING XAMPP SERVER PROPERLY,YOU DUMB!!") } else { console.log("Pasok ka na sa Harvard University!!!!!!!!"); };
+// connection.connect(function (error) {
+//   if (error) { console.log(error, "\nSET YOUR FCKING XAMPP SERVER PROPERLY,YOU DUMB!!") } else { console.log("Pasok ka na sa Harvard University!!!!!!!!"); };
 
-});
+// });
 
 module.exports = connection;

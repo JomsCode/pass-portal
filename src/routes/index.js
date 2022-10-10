@@ -13,11 +13,14 @@ const init = (app) => {
 
     // routes.Login_Manager.checkLoggedOut,
     (req, res) => {
-      res.render("homepage");
+      res.render("./dashboards/registrarDashBoard");
+      // res.render("homepage");
     }
   );
 
+
   //LOG-IN
+
 
   router.get(
     "/login",
